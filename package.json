@@ -1,0 +1,38 @@
+{
+  "name": "linkr-be",
+  "version": "1.0.0",
+  "description": "Linkedin clone",
+  "main": "server.ts",
+  "scripts": {
+    "dev":"ts-node-dev src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "lint": "tslint --project tsconfig.json",
+    "format": "prettier --write '**/*.{ts,js,json,md}'",
+    "precommit": "lint-staged",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kcblaq/linkR-be.git"
+  },
+  "keywords": [
+    "Linkedin",
+    "clone"
+  ],
+  "author": "kcblaq",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kcblaq/linkR-be/issues"
+  },
+  "homepage": "https://github.com/kcblaq/linkR-be#readme",
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.4",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.3"
+  }
+}
