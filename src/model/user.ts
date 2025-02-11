@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { connections, Document, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 import { tokenGenerator } from "../utils/jwt";
 import dotenv from "dotenv";
@@ -46,6 +46,10 @@ const UserSchema = new Schema({
   isVerified: {
     type: Boolean,
     default: false,
+  },
+  profile: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Profile",
   },
 });
 
