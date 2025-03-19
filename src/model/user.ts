@@ -12,6 +12,10 @@ export interface UserInterface extends Document {
   otp?: string;
   otpExpires: Date;
   isVerified: Boolean;
+  avatar?: string;
+  provider?: string;
+  googleId?: string;
+  token?: string; 
   comparePassword: (password: string) => Promise<boolean>;
   generatePasswordResetLink: () => string;
   changePassword: (currentPassword: string, newPassword: string) => Promise<Boolean>;
@@ -25,6 +29,22 @@ const UserSchema = new Schema({
   lastname: {
     type: String,
     required: true,
+  },
+  avatar: {
+    type: String,
+    required: false,
+  },
+  token: {
+    type: String,
+    required: false,
+  },
+  provider:{
+    type: String,
+    required: false,
+  },
+  googleId:{
+    type: String,
+    required: false,
   },
   email: {
     type: String,

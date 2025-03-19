@@ -9,9 +9,9 @@ if (!JWT_SECRET) {
   throw new Error("JWT_SECRET is not defined");
 }
 
-export function tokenGenerator(userId: string, expiresIn: any): string{
+export function tokenGenerator(userId: string, expiresIn: any, email?: string,): string{
   try{
-    return jwt.sign({ userId }, JWT_SECRET, { expiresIn: expiresIn});
+    return jwt.sign({ userId, email }, JWT_SECRET, { expiresIn: expiresIn});
   }
   catch(error){
     throw new Error("Failed to generate token");
