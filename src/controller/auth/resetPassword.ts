@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { tokenVerify } from "../../utils/jwt";
-import { User } from "../../model/user";
+import { User } from "../../schema/user";
 
 export async function resetPassword(req: Request, res: Response) {
   const { token, newPassword } = req.body;

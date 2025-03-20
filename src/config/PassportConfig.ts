@@ -1,7 +1,7 @@
 import { env } from "../utils/env";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import { User, UserInterface } from "../model/user";
+import { User, UserInterface } from "../schema/user";
 import { tokenGenerator } from "../utils/jwt";
 
 interface GoogleI {

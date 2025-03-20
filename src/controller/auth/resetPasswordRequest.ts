@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
-import { User, UserInterface } from "../../model/user";
-import { sendEmail } from "../../utils/email";
+import { User} from "../../schema/user";
+import { sendEmail } from "../../services/email";
+import { UserInterface } from "../../types/schema_types/schemaTypes";
+
 
 
 export async function resetPasswordRequestController(req: Request, res: Response){

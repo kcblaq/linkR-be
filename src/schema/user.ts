@@ -2,24 +2,9 @@ import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 import { tokenGenerator } from "../utils/jwt";
 import dotenv from "dotenv";
+import { UserInterface } from "../types/schema_types/schemaTypes";
 dotenv.config();
 
-export interface UserInterface extends Document {
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
-  otp?: string;
-  otpExpires: Date;
-  isVerified: Boolean;
-  avatar?: string;
-  provider?: string;
-  googleId?: string;
-  token?: string; 
-  comparePassword: (password: string) => Promise<boolean>;
-  generatePasswordResetLink: () => string;
-  changePassword: (currentPassword: string, newPassword: string) => Promise<Boolean>;
-}
 
 const UserSchema = new Schema({
   firstname: {
@@ -67,7 +52,35 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false,
   },
-});
+  headling: {
+    type: String,
+    required: false,
+  },
+  backgroundImage: { type: String },
+  pendingConnections: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  skills: [{ type: String }],
+  experiences: [{
+    title: { type: String, required: true },
+    company: { type: String, required: true },
+    location: { type: String },
+    startDate: { type: Date, required: true },
+    endDate: { type: Date },
+    description: { type: String }
+  }],
+  education: [{
+    school: { type: String, required: true },
+    degree: { type: String },
+    fieldOfStudy: { type: String },
+    startDate: { type: Date, required: true },
+    endDate: { type: Date }
+  }],
+  connections: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  
+},
+{
+  timestamps: true,
+}
+)
 
 UserSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
@@ -99,4 +112,4 @@ UserSchema.methods.changePassword = async function (
   return true;
 };
 
-export const User = mongoose.model("User", UserSchema);
+export const User = mongoose.model<UserInterface>("User", UserSchema);

@@ -1,7 +1,6 @@
-// middleware/auth/auth.ts
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction, Request } from "express";
 import { tokenVerify } from "../../utils/jwt";
-import { AuthRequest } from "../../types/customTypes";
+import { AuthRequest } from "../../types/customTypes";  // Import custom type
 
 export const isAuthenticated = (
   req: Request,
@@ -16,7 +15,8 @@ export const isAuthenticated = (
 
   try {
     const decoded = tokenVerify(token);
-    (req as AuthRequest).user = decoded.userId;
+    console.log(decoded);
+    req.user = decoded.userId; 
     next();
   } catch (error) {
     return res.status(401).json({ msg: "Invalid token" });

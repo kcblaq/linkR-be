@@ -1,6 +1,6 @@
 import { Response } from "express";
 import { AuthRequest } from "../../types/customTypes";
-import { User, UserInterface } from "../../model/user";
+import { User, UserInterface } from "../../schema/user";
 
 export async function changePassword(req: AuthRequest, res: Response) {
   const { currentPassword, newPassword } = req.body;

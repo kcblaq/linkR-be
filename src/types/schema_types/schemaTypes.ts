@@ -1,14 +1,27 @@
-import mongoose, { Document } from "mongoose";
+import mongoose, { Document, ObjectId } from "mongoose";
 
-export interface IUser extends Document {
-    email: string;
+
+
+export interface UserInterface extends Document {
+  _id: ObjectId; 
+  firstname: string;
+  lastname: string;
+  email: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  otp?: string;
+  otpExpires: Date;
+  isVerified: Boolean;
+  avatar?: string;
+  provider?: string;
+  googleId?: string;
+  token?: string; 
   headline?: string;
   location?: string;
-  skills: string[];
-  experiences: Array<{
+  skills?: string[];
+  backgroundImage?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  experiences?: Array<{
     title: string;
     company: string;
     location?: string;
@@ -16,19 +29,18 @@ export interface IUser extends Document {
     endDate?: Date;
     description?: string;
   }>;
-  education: Array<{
+  education?: Array<{
     school: string;
     degree?: string;
     fieldOfStudy?: string;
     startDate: Date;
     endDate?: Date;
   }>;
-  connections: mongoose.Types.ObjectId[];
-  pendingConnections: mongoose.Types.ObjectId[];
-  profilePicture?: string;
-  backgroundImage?: string;
-  createdAt: Date;
-  updatedAt: Date;
+  connections?: mongoose.Types.ObjectId[];
+  pendingConnections?: mongoose.Types.ObjectId[];
+  comparePassword: (password: string) => Promise<boolean>;
+  generatePasswordResetLink: () => string;
+  changePassword: (currentPassword: string, newPassword: string) => Promise<Boolean>;
 }
 
 
@@ -93,3 +105,13 @@ export interface IPost extends Document {
     isRead: boolean;
     createdAt: Date;
   }
+
+
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: User; // Add the user property to the Request type
+    }
+  }
+}

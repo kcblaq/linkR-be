@@ -1,9 +1,11 @@
 import express, { Request, Response } from "express";
-import { UserInterface, User } from "../../model/user";
+import { User } from "../../schema/user";
 import { tokenGenerator } from "../../utils/jwt";
 import bcrypt from "bcryptjs";
-import { sendEmail } from "../../utils/email";
+
 import { AuthRequest } from "../../types/customTypes";
+import { UserInterface } from "../../types/schema_types/schemaTypes";
+import { sendEmail } from "../../services/email";
 
 export const generateOTP = () => {
   return Math.floor(100000 + Math.random() * 900000); // 6-digit OTP
@@ -16,7 +18,7 @@ export async function signup(req: Request, res: Response) {
   if (existingUser)
     return res.status(400).json({ msg: "User with Email already exists" });
 
-  const newUser = new User({ firstname, lastname, email, password });
+  const newUser = new User({ firstname, lastname, email, password }) as UserInterface;
   const otp = generateOTP();
   const otpToken = tokenGenerator(otp.toString(), "30m");
   newUser.otp = otpToken;

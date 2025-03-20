@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { User, UserInterface } from "../../model/user";
+import { User, UserInterface } from "../../schema/user";
 import { tokenGenerator } from "../../utils/jwt";
 
 export async function login(req: Request, res: Response): Promise<Response> {

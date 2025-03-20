@@ -1,5 +1,5 @@
 import { isOtpValid } from "../../controller/auth/otpResend";
-import { User } from "../../model/user";
+import { User } from "../../schema/user";
 import { tokenVerify } from "../../utils/jwt";
 
 export async function verifyEmailService(userId: string, userOtp: string) {

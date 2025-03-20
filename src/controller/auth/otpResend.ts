@@ -1,6 +1,7 @@
-import { User } from "../../model/user";
+import { User } from "../../schema/user";
+import { sendEmail } from "../../services/email";
 import { AuthRequest } from "../../types/customTypes";
-import { sendEmail } from "../../utils/email";
+
 import { tokenGenerator } from "../../utils/jwt";
 import { generateOTP } from "./signup";
 import { Response } from "express";
